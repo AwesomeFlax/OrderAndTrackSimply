@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OrderAndTrackSimply</string>
+
+    <string name="bold_font" translatable="false">fonts/GothamProBold.ttf</string>
+    <string name="regular_font" translatable="false">fonts/GothamProRegular.ttf</string>
+    <string name="medium_font" translatable="false">fonts/GothamProMedium.ttf</string>
 </resources>

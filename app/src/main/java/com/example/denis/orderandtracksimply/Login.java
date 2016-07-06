@@ -3,12 +3,16 @@ package com.example.denis.orderandtracksimply;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digits.sdk.android.AuthCallback;
@@ -29,8 +33,9 @@ public class Login extends Activity
 
     //данные с экрана
     EditText Email;
-    Button login_email;
-    Button login_phone;
+    ImageButton login_email;
+    ImageButton login_phone;
+    CheckBox remember;
 
     private static final String TWITTER_KEY = "ERP6uVK9qi0liApgFEhPakDTf";
     private static final String TWITTER_SECRET = "NKMxW5EAMDN4YslwDWvtWvsLxd21dtONOePcucm4aW31qP8eBK";
@@ -45,19 +50,35 @@ public class Login extends Activity
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
         setContentView(R.layout.activity_login);
 
+        //инициализация шрифтов
+        Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
+        Typeface regular = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
+        Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
+
         intent = new Intent(this, Order.class);
 
         //хватаем элементы с экрана
         Email = (EditText) findViewById(R.id.email);
-        login_email = (Button) findViewById(R.id.using_email);
-        login_phone = (Button) findViewById(R.id.using_phone);
+        login_email = (ImageButton) findViewById(R.id.using_email);
+        login_phone = (ImageButton) findViewById(R.id.using_phone);
+        TextView email_text = (TextView) findViewById(R.id.email_text);
+        TextView phone_text = (TextView) findViewById(R.id.phone_text);
+        TextView enter_email = (TextView) findViewById(R.id.enter_email);
+        Email = (EditText) findViewById(R.id.email);
+        remember = (CheckBox) findViewById(R.id.remember);
+
+        //применяем шрифт к тексту
+        email_text.setTypeface(regular);
+        phone_text.setTypeface(regular);
+        enter_email.setTypeface(regular);
+        Email.setTypeface(regular);
+        remember.setTypeface(regular);
 
         //обработчики нажатий кнопок
         login_email.setOnClickListener(new AuthorizationMethods());
         login_phone.setOnClickListener(new AuthorizationMethods());
 
         digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
-        digitsButton.setAuthTheme(R.style.CustomDigitsTheme);
 
         assert digitsButton != null;
 
@@ -70,9 +91,12 @@ public class Login extends Activity
                 Toast.makeText(getApplicationContext(), "Authentication successful for "
                         + phoneNumber, Toast.LENGTH_LONG).show();
 
-                intent.putExtra("phone", phoneNumber);
-                intent.putExtra("email", "null");
-                startActivity(intent);
+                if (phoneNumber != null)
+                {
+                    intent.putExtra("phone", phoneNumber);
+                    intent.putExtra("email", "null");
+                    startActivity(intent);
+                }
             }
 
             @Override
@@ -92,9 +116,10 @@ public class Login extends Activity
             {
                 case R.id.using_phone:
                 {
-                    //великолепные рашения (илиточка)
+                    //великолепные решения (илиточка)
                     digitsButton.performClick();
                 }
+                break;
 
                 case R.id.using_email:
                 {
@@ -104,6 +129,7 @@ public class Login extends Activity
                     intent.putExtra("mail", Email.getText().toString());
                     startActivity(intent);
                 }
+                break;
             }
         }
     }
