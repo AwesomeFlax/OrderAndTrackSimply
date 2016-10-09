@@ -1,7 +1,22 @@
 <resources>
-    <string name="app_name">OrderAndTrackSimply</string>
+    <string name="app_name">Артеком</string>
 
     <string name="bold_font" translatable="false">fonts/GothamProBold.ttf</string>
     <string name="regular_font" translatable="false">fonts/GothamProRegular.ttf</string>
     <string name="medium_font" translatable="false">fonts/GothamProMedium.ttf</string>
+
+    <string name="title_activity_order">Рабочая зона</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Настройки</string>
+    <string name="new_order">Новый заказ</string>
+    <string name="orders">Заказы</string>
+    <string name="settlements">Взаиморасчёты</string>
+    <string name="about_us">O нас</string>
+    <string name="exit">Выход</string>
+    <string name="category_name">Дополнительно</string>
+
+
 </resources>

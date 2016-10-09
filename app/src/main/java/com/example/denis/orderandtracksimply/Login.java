@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -55,7 +54,7 @@ public class Login extends Activity
         Typeface regular = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
         Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
 
-        intent = new Intent(this, Order.class);
+        intent = new Intent(this, MainZone.class);
 
         //хватаем элементы с экрана
         Email = (EditText) findViewById(R.id.email);
@@ -94,7 +93,7 @@ public class Login extends Activity
                 if (phoneNumber != null)
                 {
                     intent.putExtra("phone", phoneNumber);
-                    intent.putExtra("email", "null");
+                    intent.putExtra("email", "empty");
                     startActivity(intent);
                 }
             }
@@ -125,8 +124,8 @@ public class Login extends Activity
                 {
                     //пока так, будет просто переход с данными
 
-                    intent.putExtra("phone", "null");
-                    intent.putExtra("mail", Email.getText().toString());
+                    intent.putExtra("phone", "empty");
+                    intent.putExtra("email", Email.getText().toString());
                     startActivity(intent);
                 }
                 break;
