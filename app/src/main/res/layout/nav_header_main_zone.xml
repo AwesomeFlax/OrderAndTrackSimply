@@ -15,16 +15,17 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="104dp"
         app:srcCompat="@drawable/artekom_logo"
         android:id="@+id/imageView3"
-        android:paddingTop="10dp"/>
+        android:paddingTop="10dp"
+        android:layout_height="80dp" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_weight="0.33">
+        android:layout_weight="0.33"
+        android:paddingTop="10dp"
+        android:layout_height="40dp">
 
         <ImageView
             android:id="@+id/login_type"
@@ -32,7 +33,7 @@
             android:elevation="0dp"
             android:layout_width="30dp"
             android:background="@drawable/email"
-            android:foregroundGravity="center_vertical|center_horizontal"/>
+            android:foregroundGravity="center_vertical|center_horizontal" />
 
         <TextView
             android:layout_height="30dp"
@@ -42,7 +43,7 @@
             android:textColor="@color/dgts__text_dark"
             android:gravity="center_vertical"
             android:layout_width="280dp"
-            android:paddingLeft="13dp"/>
+            android:paddingLeft="13dp" />
 
     </LinearLayout>
 

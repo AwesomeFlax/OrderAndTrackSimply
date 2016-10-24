@@ -92,6 +92,8 @@ public class Login extends Activity
 
                 if (phoneNumber != null)
                 {
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                     intent.putExtra("phone", phoneNumber);
                     intent.putExtra("email", "empty");
                     startActivity(intent);
@@ -123,6 +125,8 @@ public class Login extends Activity
                 case R.id.using_email:
                 {
                     //пока так, будет просто переход с данными
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                     intent.putExtra("phone", "empty");
                     intent.putExtra("email", Email.getText().toString());

@@ -84,6 +84,8 @@ public class MainZone extends AppCompatActivity
         fOrders = new fragmentOrders();
         fAboutUs = new fragmentAboutUs();
         fSettlments = new fragmentSettlments();
+
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -99,32 +101,6 @@ public class MainZone extends AppCompatActivity
         {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.order, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     // при выборе пункта меню открывается соответствующий контейнер
@@ -156,6 +132,10 @@ public class MainZone extends AppCompatActivity
         else if (id == R.id.nav_exit)
         {
             // выход
+
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent = new Intent(this, Login.class);
+            startActivity(intent);
         }
 
         fragmentTransaction.commit();
