@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.denis.orderandtracksimply.fragments.fragmentAboutUs;
 import com.example.denis.orderandtracksimply.fragments.fragmentNewOrder;
 import com.example.denis.orderandtracksimply.fragments.fragmentOrders;
 import com.example.denis.orderandtracksimply.fragments.fragmentSettlments;
@@ -27,7 +26,6 @@ public class MainZone extends AppCompatActivity
 {
     fragmentNewOrder fNewOrder;
     fragmentOrders fOrders;
-    fragmentAboutUs fAboutUs;
     fragmentSettlments fSettlments;
 
     Intent intent;
@@ -82,7 +80,6 @@ public class MainZone extends AppCompatActivity
         //определяем фрагменты
         fNewOrder = new fragmentNewOrder();
         fOrders = new fragmentOrders();
-        fAboutUs = new fragmentAboutUs();
         fSettlments = new fragmentSettlments();
 
         navigationView.setItemIconTintList(null);
@@ -127,7 +124,9 @@ public class MainZone extends AppCompatActivity
         }
         else if (id == R.id.nav_about_us)
         {
-            fragmentTransaction.replace(R.id.container, fAboutUs);
+            // слайдер для "о нас"
+            intent = new Intent(this, AboutUs.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_exit)
         {

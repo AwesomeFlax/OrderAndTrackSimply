@@ -65,7 +65,7 @@ public class Login extends Activity
         TextView enter_email = (TextView) findViewById(R.id.enter_email);
         Email = (EditText) findViewById(R.id.email);
         remember = (CheckBox) findViewById(R.id.remember);
-
+        
         //применяем шрифт к тексту
         email_text.setTypeface(regular);
         phone_text.setTypeface(regular);
