@@ -2,8 +2,16 @@ package com.example.denis.orderandtracksimply;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,22 +19,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.denis.orderandtracksimply.fragments.fragmentNewOrder;
 import com.example.denis.orderandtracksimply.fragments.fragmentOrders;
-import com.example.denis.orderandtracksimply.fragments.fragmentSettlments;
+import com.example.denis.orderandtracksimply.fragments.fragmentAboutUs;
+import com.example.denis.orderandtracksimply.fragments.fragmentSettlements;
 
 public class MainZone extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
     fragmentNewOrder fNewOrder;
     fragmentOrders fOrders;
-    fragmentSettlments fSettlments;
+    fragmentAboutUs fAboutUs;
+    fragmentSettlements fSettlements;
 
     Intent intent;
 
@@ -35,6 +45,7 @@ public class MainZone extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_zone);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,6 +53,19 @@ public class MainZone extends AppCompatActivity
         Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
         Typeface regular = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
         Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
+
+        // making notification bar transparent
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
 
         // считали данные с логин скрина
         intent = getIntent();
@@ -80,7 +104,8 @@ public class MainZone extends AppCompatActivity
         //определяем фрагменты
         fNewOrder = new fragmentNewOrder();
         fOrders = new fragmentOrders();
-        fSettlments = new fragmentSettlments();
+        fSettlements = new fragmentSettlements();
+        fAboutUs = new fragmentAboutUs();
 
         navigationView.setItemIconTintList(null);
     }
@@ -108,7 +133,7 @@ public class MainZone extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_new_order)
         {
@@ -120,20 +145,17 @@ public class MainZone extends AppCompatActivity
         }
         else if (id == R.id.nav_settlements)
         {
-            fragmentTransaction.replace(R.id.container, fSettlments);
+            fragmentTransaction.replace(R.id.container, fSettlements);
         }
         else if (id == R.id.nav_about_us)
         {
-            // слайдер для "о нас"
-            intent = new Intent(this, AboutUs.class);
-            startActivity(intent);
+            fragmentTransaction.replace(R.id.container, fAboutUs);
         }
         else if (id == R.id.nav_exit)
         {
             // выход
-
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent = new Intent(this, Login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
 

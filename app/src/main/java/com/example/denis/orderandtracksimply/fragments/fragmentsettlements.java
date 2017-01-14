@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import com.example.denis.orderandtracksimply.R;
 
-public class fragmentNewOrder extends Fragment
+public class fragmentSettlements extends Fragment
 {
-    public fragmentNewOrder()
+
+
+    public fragmentSettlements()
     {
         // Required empty public constructor
     }
@@ -22,8 +24,7 @@ public class fragmentNewOrder extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-
-        return inflater.inflate(R.layout.fragment_new_order, null);
+        return inflater.inflate(R.layout.fragment_settlments, null);
     }
 
 }
