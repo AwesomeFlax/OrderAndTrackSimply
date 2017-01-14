@@ -3,7 +3,7 @@ package com.example.denis.orderandtracksimply;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +32,13 @@ public class Login extends Activity
     //переменные для доступа по всему классу
     DigitsAuthButton digitsButton;
     Intent intent;
+    SharedPreferences sPref;
+    String user_data = "";
 
     //данные с экрана
     EditText Email;
-    ImageButton login_email;
-    ImageButton login_phone;
+    Button login_email;
+    Button login_phone;
     CheckBox remember;
 
     private static final String TWITTER_KEY = "ERP6uVK9qi0liApgFEhPakDTf";
@@ -59,12 +61,7 @@ public class Login extends Activity
 
         intent = new Intent(this, MainZone.class);
 
-        // making notification bar transparent
-        if (Build.VERSION.SDK_INT >= 21)
-        {
-            //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-
+        // making notification bar colored
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {
             Window window = getWindow();
@@ -74,20 +71,21 @@ public class Login extends Activity
 
         //хватаем элементы с экрана
         Email = (EditText) findViewById(R.id.email);
-        login_email = (ImageButton) findViewById(R.id.using_email);
-        login_phone = (ImageButton) findViewById(R.id.using_phone);
-        TextView email_text = (TextView) findViewById(R.id.email_text);
-        TextView phone_text = (TextView) findViewById(R.id.phone_text);
+        login_email = (Button) findViewById(R.id.using_email);
+        login_phone = (Button) findViewById(R.id.using_phone);
         TextView enter_email = (TextView) findViewById(R.id.enter_email);
         Email = (EditText) findViewById(R.id.email);
         remember = (CheckBox) findViewById(R.id.remember);
-        
+
+        loadText();
+
         //применяем шрифт к тексту
-        email_text.setTypeface(regular);
-        phone_text.setTypeface(regular);
         enter_email.setTypeface(regular);
         Email.setTypeface(regular);
         remember.setTypeface(regular);
+
+        login_email.setTypeface(regular);
+        login_phone.setTypeface(regular);
 
         //обработчики нажатий кнопок
         login_email.setOnClickListener(new AuthorizationMethods());
@@ -108,10 +106,9 @@ public class Login extends Activity
 
                 if (phoneNumber != null)
                 {
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                     intent.putExtra("phone", phoneNumber);
                     intent.putExtra("email", "empty");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
             }
@@ -124,6 +121,41 @@ public class Login extends Activity
         });
     }
 
+    //сохранение данных пользователя
+    void saveText()
+    {
+        sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+
+        if (remember.isChecked())
+        {
+            ed.putString("user_data", Email.getText().toString());
+            ed.putBoolean("to_load", true);
+        }
+        else
+        {
+            ed.putBoolean("to_load", false);
+            user_data = sPref.getString("user_data", "");
+            ed.putString("user_data", user_data);
+        }
+
+        ed.apply();
+    }
+
+    //загрузка данных пользователя
+    void loadText()
+    {
+        sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
+        user_data = sPref.getString("user_data", "");
+
+        Boolean to_load = sPref.getBoolean("to_load", false);
+
+        if (to_load)
+        {
+            remember.setChecked(true);
+            Email.setText(user_data);
+        }
+    }
 
     class AuthorizationMethods implements View.OnClickListener
     {
@@ -135,6 +167,7 @@ public class Login extends Activity
                 case R.id.using_phone:
                 {
                     //великолепные решения (илиточка)
+
                     digitsButton.performClick();
                 }
                 break;
@@ -142,11 +175,10 @@ public class Login extends Activity
                 case R.id.using_email:
                 {
                     //пока так, будет просто переход с данными
-
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                     intent.putExtra("phone", "empty");
                     intent.putExtra("email", Email.getText().toString());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    saveText();
                     startActivity(intent);
                 }
                 break;

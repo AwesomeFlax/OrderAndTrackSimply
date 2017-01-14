@@ -15,7 +15,7 @@
 
     <style name="BrandedCheckBox" parent="AppTheme">
         <item name="colorAccent">#007e8c</item>
-        <item name="colorControlNormal">#ff0000</item>
+        <item name="colorControlNormal">#000000</item>
     </style>
 
 </resources>
