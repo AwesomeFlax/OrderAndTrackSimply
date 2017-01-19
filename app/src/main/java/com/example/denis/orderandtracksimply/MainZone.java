@@ -49,7 +49,7 @@ public class MainZone extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //инициализация шрифтов
+        // fonts init
         Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
         Typeface regular = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
         Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
@@ -67,7 +67,7 @@ public class MainZone extends AppCompatActivity
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
-        // считали данные с логин скрина
+        // getting login data
         intent = getIntent();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -81,16 +81,16 @@ public class MainZone extends AppCompatActivity
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
 
-        // заполняем информацию о пользователе
+        // using login info in ND
         String phone = intent.getStringExtra("phone");
         String e_mail = intent.getStringExtra("email");
 
-        // ловим то поле, куда впишем в последствии идентификатор
+        // getting element and filling info into
         View hView =  navigationView.getHeaderView(0);
         TextView user_id = (TextView) hView.findViewById(R.id.user_id);
         ImageView login_type = (ImageView) hView.findViewById(R.id.login_type);
 
-        // проверка на уровне помойки, но надежно
+        // setting login type logo
         if (!phone.equals("empty"))
         {
             user_id.setText(phone);
@@ -101,7 +101,7 @@ public class MainZone extends AppCompatActivity
 
         user_id.setTypeface(regular);
 
-        //определяем фрагменты
+        // catching fragments
         fNewOrder = new fragmentNewOrder();
         fOrders = new fragmentOrders();
         fSettlements = new fragmentSettlements();
@@ -125,7 +125,7 @@ public class MainZone extends AppCompatActivity
         }
     }
 
-    // при выборе пункта меню открывается соответствующий контейнер
+    // container select onclick
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item)
@@ -153,7 +153,7 @@ public class MainZone extends AppCompatActivity
         }
         else if (id == R.id.nav_exit)
         {
-            // выход
+            // exit
             intent = new Intent(this, Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

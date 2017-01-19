@@ -29,18 +29,19 @@ import io.fabric.sdk.android.Fabric;
 
 public class Login extends Activity
 {
-    //переменные для доступа по всему классу
+    // access variables
     DigitsAuthButton digitsButton;
     Intent intent;
     SharedPreferences sPref;
     String user_data = "";
 
-    //данные с экрана
+    // screen data
     EditText Email;
     Button login_email;
     Button login_phone;
     CheckBox remember;
 
+    // twitter keys
     private static final String TWITTER_KEY = "ERP6uVK9qi0liApgFEhPakDTf";
     private static final String TWITTER_SECRET = "NKMxW5EAMDN4YslwDWvtWvsLxd21dtONOePcucm4aW31qP8eBK";
 
@@ -54,7 +55,7 @@ public class Login extends Activity
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
         setContentView(R.layout.activity_login);
 
-        //инициализация шрифтов
+        // fonts init
         Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
         Typeface regular = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
         Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
@@ -69,7 +70,7 @@ public class Login extends Activity
             window.setStatusBarColor(getResources().getColor(R.color.deep_blue));
         }
 
-        //хватаем элементы с экрана
+        // screen elements
         Email = (EditText) findViewById(R.id.email);
         login_email = (Button) findViewById(R.id.using_email);
         login_phone = (Button) findViewById(R.id.using_phone);
@@ -79,7 +80,7 @@ public class Login extends Activity
 
         loadText();
 
-        //применяем шрифт к тексту
+        // using our fonts everywhere
         enter_email.setTypeface(regular);
         Email.setTypeface(regular);
         remember.setTypeface(regular);
@@ -87,7 +88,7 @@ public class Login extends Activity
         login_email.setTypeface(regular);
         login_phone.setTypeface(regular);
 
-        //обработчики нажатий кнопок
+        // setting on clicker funcs
         login_email.setOnClickListener(new AuthorizationMethods());
         login_phone.setOnClickListener(new AuthorizationMethods());
 
@@ -121,7 +122,7 @@ public class Login extends Activity
         });
     }
 
-    //сохранение данных пользователя
+    // user data saving
     void saveText()
     {
         sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -142,7 +143,7 @@ public class Login extends Activity
         ed.apply();
     }
 
-    //загрузка данных пользователя
+    // user data loading
     void loadText()
     {
         sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -166,7 +167,7 @@ public class Login extends Activity
             {
                 case R.id.using_phone:
                 {
-                    //великолепные решения (илиточка)
+                    // later to replace with better solution
 
                     digitsButton.performClick();
                 }
@@ -174,7 +175,7 @@ public class Login extends Activity
 
                 case R.id.using_email:
                 {
-                    //пока так, будет просто переход с данными
+                    // sending data to another one activity
                     intent.putExtra("phone", "empty");
                     intent.putExtra("email", Email.getText().toString());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
