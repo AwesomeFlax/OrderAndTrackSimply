@@ -33,16 +33,20 @@
             android:id="@+id/order_title"
             android:hint="Название проекта"
             android:layout_width="270dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
 
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
             android:id="@+id/send_button"
             android:layout_below="@+id/frameLayout2"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/send"
-            android:layout_marginLeft="290dp"/>
+            android:layout_marginLeft="290dp"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_menu_send"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"/>
 
     </FrameLayout>
 

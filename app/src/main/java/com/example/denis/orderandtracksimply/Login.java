@@ -56,9 +56,9 @@ public class Login extends Activity
         setContentView(R.layout.activity_login);
 
         // fonts init
-        Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
+        //Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
         Typeface regular = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
-        Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
+        //Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
 
         intent = new Intent(this, MainZone.class);
 

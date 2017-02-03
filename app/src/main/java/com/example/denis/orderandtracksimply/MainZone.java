@@ -50,9 +50,9 @@ public class MainZone extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         // fonts init
-        Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
+        //Typeface bold = Typeface.createFromAsset(getAssets(), getString(R.string.bold_font));
         Typeface regular = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
-        Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
+        //Typeface medium = Typeface.createFromAsset(getAssets(), getString(R.string.regular_font));
 
         // making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21)
