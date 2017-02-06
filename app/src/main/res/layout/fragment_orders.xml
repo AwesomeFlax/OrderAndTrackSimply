@@ -6,20 +6,74 @@
              android:id="@+id/fragmOrders">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/orders"
-        android:textSize="12sp"
-        android:id="@+id/title"
-        android:layout_margin="5dp"/>
+        android:layout_height="425dp">
+
+        <Button
+            android:text="L"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/but_L"
+            android:layout_weight="1"
+            android:enabled="false"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:text="Заказ:"
+                android:layout_width="match_parent"
+                android:id="@+id/order"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:text="Клиент:"
+                android:layout_width="match_parent"
+                android:id="@+id/client"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:text="Статус:"
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:text="1 / n"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/count"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="180dp"/>
+        </LinearLayout>
+
+        <Button
+            android:text="R"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/but_R"
+            android:layout_weight="1"
+            android:enabled="false"/>
+    </LinearLayout>
 
     <Button
         android:text="get data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="430dp"
         />
 
 </FrameLayout>
